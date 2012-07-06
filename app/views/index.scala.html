@@ -1,0 +1,28 @@
+@(projects: List[Project], projectForm: Form[Project])
+
+@import helper._
+
+@main("Project Profile List") {
+  <h1> List of Projects </h1>
+  <div class="list">
+    <ul>
+      @for(project <- projects) {
+        <li>
+          <span>@project.name</span>
+          @form(routes.Application.removeProject(project.id)) {
+            <input type="submit" value="Delete" />
+          }
+        </li>
+      }
+    </ul>
+    <div class="add">
+      <h2> Add a project </h2>
+      <div>
+        @form(routes.Application.createProject()) {
+          @inputText(projectForm("name"))
+          <input type="submit" value="create" />
+        }
+      </div>
+    </div>
+  </div>
+}
